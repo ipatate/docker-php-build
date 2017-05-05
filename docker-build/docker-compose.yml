@@ -1,0 +1,16 @@
+web:
+  container_name: nginx-build
+  image: nginx:latest
+  ports:
+    - "80:80"
+  volumes:
+    - ../:/app
+    - ./default.conf:/etc/nginx/conf.d/default.conf
+  links:
+    - php
+php:
+  container_name: php-build
+  build: .
+  volumes:
+    - ../:/app
+    - ./docker_conf/php:/usr/local/etc/php/conf.d
